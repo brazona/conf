@@ -37,7 +37,7 @@ jobs:
       var_values: ${{ steps.values_file_env.outputs.values_file_env }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: File Env Homologation
       if: contains(inputs.name_env, 'HOMOLOGATION_ENV')
@@ -65,7 +65,7 @@ jobs:
       successful: ${{ steps.status.outputs.status }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     
     - name: Preparete Manisfest k8s
       run: |
