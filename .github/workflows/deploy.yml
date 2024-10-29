@@ -72,7 +72,7 @@ jobs:
         echo ${{ needs.envfile.outputs.var_values }} >> "${{env.TEMPLATE_TXT}}" 
         bash .github/workflows/scripts/manifest.sh ${{env.TEMPLATE_TXT}} ${{env.MANIFEST_IN}} ${{env.MANIFEST_OUT}} ${{inputs.docker_image_tag}}
     - name: Set Kubernetes Context
-      uses: azure/k8s-set-context@v1
+      uses: azure/k8s-set-context@v4
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBECONFIG }}
