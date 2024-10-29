@@ -1,0 +1,42 @@
+server:
+  port: 7777
+spring:
+  jpa:
+    properties:
+      hibernate:
+        default_schema: api
+        jdbc:
+          lob:
+            non_contextual_creation: 'true'
+        temp:
+          use_jdbc_metadata_defaults: 'false'
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:postgresql://localhost:5434/idp
+    password: 123456
+    username: idp_dev
+    schema: api
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: '20000'
+      idle-timeout: '10000'
+      maximum-pool-size: '40'
+      auto-commit: 'true'
+      minimum-idle: '10'
+  liquibase:
+    url: jdbc:postgresql://localhost:5434/idp
+    password: 123456
+    user: idp_dev
+    default-schema: api
+    enabled: true
+    change-log: classpath:changelog-master.yml
+logging:
+  level:
+    liquibase: DEBUG
+    org:
+      hibernate: DEBUG
+      springframework:
+        security: TRACE
+        data: DEBUG

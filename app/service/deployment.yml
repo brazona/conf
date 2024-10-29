@@ -1,0 +1,108 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-server
+  namespace: ${NAMESPACE}
+  labels:
+    app: config-server
+spec:
+  selector:
+    matchLabels:
+      app: config-server
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: config-server
+    spec:
+      restartPolicy: Always
+      securityContext:
+        runAsUser: 0
+      terminationGracePeriodSeconds: 30
+      imagePullSecrets:
+        - name: dockerconfigjson-github-com
+      containers:
+      - name: config-server
+        image: ${IMAGE}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8445
+          protocol: TCP
+        env:
+          - name: SPRING_ACTIVE_PROFILE
+            valueFrom:
+              configMapKeyRef:
+                name: config-server           
+                key: SPRING_ACTIVE_PROFILE
+          
+          - name: GITHUB_TOKEN
+            valueFrom:
+              configMapKeyRef:
+                name: config-server           
+                key: GITHUB_TOKEN  
+
+          - name: GITHUB_USER
+            valueFrom:
+              configMapKeyRef:
+                name: config-server           
+                key: GITHUB_USER   
+
+          - name: CONFIG_SERVER_PASS
+            valueFrom:
+              configMapKeyRef:
+                name: config-server           
+                key: CONFIG_SERVER_PASS
+
+          - name: CONFIG_SERVER_ENCRYPT_KEY
+            valueFrom:
+              configMapKeyRef:
+                name: config-server           
+                key: CONFIG_SERVER_ENCRYPT_KEY
+
+          - name: GITHUB_BRANCH
+            valueFrom:
+              configMapKeyRef:
+                name: config-server           
+                key: GITHUB_BRANCH
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: config-server-service
+  namespace: ${NAMESPACE}
+spec:
+  selector:
+    app: config-server
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8445
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: ${NAMESPACE}
+  name: config-server-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: ${DNS}
+    http:
+      paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: config-server-service
+              port:
+                number: 80

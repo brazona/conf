@@ -1,0 +1,9 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: postgres
+  namespace: homologation
+data:
+  POSTGRES_USER: homologation_JM4EJGUWG4
+  POSTGRES_PASSWORD: admin_BBM3NND08L
+  POSTGRES_DB: idp

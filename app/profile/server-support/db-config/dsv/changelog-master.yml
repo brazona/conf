@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: roles.sql
+  - include:
+      file: schema.sql
+  - include:
+      file: data.sql

@@ -1,0 +1,12 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: grafana
+  namespace: homologation
+data:
+  SPRING_ACTIVE_PROFILE: hmg
+  GITHUB_TOKEN: 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
+  GITHUB_USER: CezarFelipe
+  CONFIG_SERVER_PASS: nscCwsFjRz
+  CONFIG_SERVER_ENCRYPT_KEY: 8GULN9CWY4O
+  GITHUB_BRANCH: release/1.0.0

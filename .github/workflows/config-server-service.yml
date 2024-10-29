@@ -1,0 +1,166 @@
+
+###
+### Pipeline que insere o arquivo .env  no ambiente do github
+### E arquivo configmap.yml ao ambiente k8s
+###
+
+name: Config Server Service Pipeline
+
+on:
+  push:
+    paths:
+      - 'app/profile/config-server-service/**'
+    branches:
+      - 'main'
+  pull_request:
+    paths:
+      - 'app/profile/config-server-service/**'
+    branches:
+      - 'main'
+      - 'develop'
+      - 'hotfix/**'
+      - 'release/**'
+  workflow_dispatch:
+env:
+  GITHUB_REPOSITORY: brazona/config-server-service
+jobs:
+  #identifica as variaveis 
+  identify:
+    name: Call Identifier
+    uses: ./.github/workflows/identifier.yml
+    with:
+      github_base_ref: ${{github.base_ref}}
+      github_event_name: ${{github.event_name }}
+      github_ref_name: ${{github.ref_name}}
+  
+  # Localiza o arquivo .env
+  envfile:
+    name: Envfile Search
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs: [identify]
+    env:
+      FILE_PATH: 'app/profile/config-server-service/dsv/.env'
+    outputs:
+      envfile: ${{ steps.envfile_search.outputs.envfile }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: File Env Homologation
+      if: contains(needs.identify.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
+      run: |
+        echo "FILE_PATH=app/profile/config-server-service/hmg/.env" >> $GITHUB_ENV
+    - name: File Env Staging
+      if: contains(needs.identify.outputs.github_env_file_field, 'STAGING_ENV')
+      run: |
+        echo "FILE_PATH=app/profile/config-server-service/stg/.env" >> $GITHUB_ENV
+    - name: File Env Production
+      if: contains(needs.identify.outputs.github_env_file_field, 'PRODUCTION_ENV')
+      run: |
+        echo "FILE_PATH=app/profile/config-server-service/prd/.env" >> $GITHUB_ENV
+    - name: Out Envfile path
+      id: envfile_search
+      run: echo "envfile=${{ env.FILE_PATH }}" >> $GITHUB_OUTPUT
+  
+  # Realiza leitura do arquivo .env
+  read-file:
+    name: Read File Env
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs: [identify , envfile]
+    env:
+      PATH_FILE_ENV: ${{needs.envfile.outputs.envfile}}
+      FILE_VALUE: ""
+    environment:
+        name: ${{needs.identify.outputs.environment_name}}
+    outputs:
+        file: ${{ steps.file.outputs.file-env }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Definition path file
+      run: | 
+          echo $(cat ${{ env.PATH_FILE_ENV }}) >> "env-temp.txt"
+          #sed -i 's/\s\+/\n/g' env-temp.txt
+          #cat env-temp.txt
+          echo "FILE_VALUE=$(cat env-temp.txt)" >> $GITHUB_ENV
+    - name: Defined value file
+      id: file
+      run: |
+        echo "file-env=${{ env.FILE_VALUE }}" >> $GITHUB_OUTPUT
+  
+  # Aplica deploy no ambiente k8s
+  deploy-env:
+    name: Deploy File
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs: [identify, read-file]
+    environment:
+        name: ${{needs.identify.outputs.environment_name}}
+    env:
+      FILE_ENV: ${{needs.read-file.outputs.file}}
+    steps:
+    - name: Insert File Env 
+      uses: mmoyaferrer/set-github-variable@v1.0.0
+      with:
+        name: ${{needs.identify.outputs.github_env_file_field}}
+        value: ${{ env.FILE_ENV }}
+        repository: ${{ env.GITHUB_REPOSITORY }}
+        token: ${{ secrets.PIPELINE_TOKEN }}  
+   # Localiza o arquivo configmap para deploy
+  configmap:
+    name: Configmap Search
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs: [identify]
+    env:
+      FILE_PATH: 'app/profile/config-server-service/dsv/configmap.yml'
+    outputs:
+      configmap: ${{ steps.configmap_search.outputs.configmap }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: File Env Homologation
+      if: contains(needs.identify.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
+      run: |
+        echo "FILE_PATH=app/profile/config-server-service/hmg/configmap.yml" >> $GITHUB_ENV
+    - name: File Env Staging
+      if: contains(needs.identify.outputs.github_env_file_field, 'STAGING_ENV')
+      run: |
+        echo "FILE_PATH=app/profile/config-server-service/stg/configmap.yml" >> $GITHUB_ENV
+    - name: File Env Production
+      if: contains(needs.identify.outputs.github_env_file_field, 'PRODUCTION_ENV')
+      run: |
+        echo "FILE_PATH=app/profile/config-server-service/prd/configmap.yml" >> $GITHUB_ENV
+    - name: Out Configmap path
+      id: configmap_search
+      run: echo "configmap=${{ env.FILE_PATH }}" >> $GITHUB_OUTPUT
+
+  # Aplica o deploy no ambiente k8s
+  deploy-config:
+    name: Deploy Configmap 
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs: [identify ,configmap]
+    environment:
+      name: ${{needs.identify.outputs.environment_name}}
+    outputs:
+      successful: ${{ steps.status.outputs.status }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    
+    - name: Set Kubernetes Context
+      uses: azure/k8s-set-context@v1
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+    - name: Deploy to Cluster
+      run: | 
+        kubectl apply -f ${{needs.configmap.outputs.configmap}}
+    - name: Successful
+      id: status
+      run: echo "status=true" >> $GITHUB_OUTPUT    

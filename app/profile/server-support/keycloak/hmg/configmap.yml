@@ -1,0 +1,15 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: keycloak
+  namespace: homologation
+data:
+  KEYCLOAK_ADMIN: hmg_9QIEWRUBNR
+  KEYCLOAK_ADMIN_PASSWORD: H0JFQA1228
+  KC_DB: postgres
+  KC_DB_SCHEMA: keycloak
+  KC_DB_URL: postgresql://db_pg12
+  KC_DB_USERNAME: homologation
+  KC_DB_PASSWORD: hmg_9IGG1XZLP8
+  KC_DB_NAME: idp
+  KEYCLOAK_IMPORT: ./realm-brazona.json
