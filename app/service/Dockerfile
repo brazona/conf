@@ -1,4 +1,4 @@
-FROM openjdk:21
+FROM openjdk:24
 LABEL maintainer=Brazoona\ Cézar
 VOLUME /tmp
 
