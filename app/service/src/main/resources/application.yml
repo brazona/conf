@@ -1,0 +1,186 @@
+spring:
+  profiles:
+    active: ${SPRING_ACTIVE_PROFILE}
+  application:
+    name: config-server
+---
+name: local
+environment: localhost
+
+spring:
+  security:
+    user:
+      name: LOCAL_A2NN79
+      password: ${CONFIG_SERVER_PASS}
+  config:
+    activate:
+      on-profile: local
+  cloud:
+    config:
+      server:
+        encrypt:
+          enabled: false
+        git:
+          password: ${GITHUB_TOKEN}
+          username: ${GITHUB_USER}
+          strictHostKeyChecking: 'false'
+          ignore-local-ssh-settings: 'true'
+          uri: ${GITHUB_URL}
+          clone-on-start: true
+          default-label: ${GITHUB_BRANCH}
+          search-paths: '{application}/local'
+encrypt:
+  key: ${CONFIG_SERVER_ENCRYPT_KEY}
+server:
+  port: 8888
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+---
+name: dsv
+environment: development
+
+spring:
+  security:
+    user:
+      name: DEV_SFBM31
+      password: ${CONFIG_SERVER_PASS}
+  config:
+    activate:
+      on-profile: dsv
+  cloud:
+    config:
+      server:
+        git:
+          password: ${GITHUB_TOKEN}
+          username: ${GITHUB_USER}
+          strictHostKeyChecking: 'false'
+          ignore-local-ssh-settings: 'true'
+          uri: ${GITHUB_URL}
+          clone-on-start: true
+          default-label: ${GITHUB_BRANCH}
+          search-paths: '{application}/dsv'
+encrypt:
+  key: ${CONFIG_SERVER_ENCRYPT_KEY}
+server:
+  port: 8445
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+---
+
+name: hmg
+environment: homologation
+
+spring:
+  security:
+    user:
+      name: DEV_SFBM31
+      password: ${CONFIG_SERVER_PASS}
+  config:
+    activate:
+      on-profile: hmg
+  cloud:
+    config:
+      server:
+        git:
+          password: ${GITHUB_TOKEN}
+          username: ${GITHUB_USER}
+          strictHostKeyChecking: 'false'
+          ignore-local-ssh-settings: 'true'
+          uri: ${GITHUB_URL}
+          clone-on-start: true
+          default-label: ${GITHUB_BRANCH}
+          search-paths: '{application}/hmg'
+encrypt:
+  key: ${CONFIG_SERVER_ENCRYPT_KEY}
+server:
+  port: 8445
+
+logging:
+  level:
+    org:
+      springframework:
+        security: INFO
+
+---
+
+name: stg
+environment: staging
+
+spring:
+  security:
+    user:
+      name: STG_0EGYL8I
+      password: ${CONFIG_SERVER_PASS}
+  config:
+    activate:
+      on-profile: stg
+  cloud:
+    config:
+      server:
+        git:
+          password: ${GITHUB_TOKEN}
+          username: ${GITHUB_USER}
+          strictHostKeyChecking: 'false'
+          ignore-local-ssh-settings: 'true'
+          uri: ${GITHUB_URL}
+          clone-on-start: true
+          default-label: ${GITHUB_BRANCH}
+          search-paths: '{application}/stg'
+
+encrypt:
+  key: ${CONFIG_SERVER_ENCRYPT_KEY}
+server:
+  port: 8445
+
+logging:
+  level:
+    org:
+      springframework:
+        security: INFO
+
+---
+
+name: prd
+environment: production
+
+spring:
+  security:
+    user:
+      name: PRD_930M3OH
+      password: ${CONFIG_SERVER_PASS}
+  config:
+    activate:
+      on-profile: prd
+  cloud:
+    config:
+      server:
+        git:
+          password: ${GITHUB_TOKEN}
+          username: ${GITHUB_USER}
+          strictHostKeyChecking: 'false'
+          ignore-local-ssh-settings: 'true'
+          uri: ${GITHUB_URL}
+          clone-on-start: true
+          default-label: ${GITHUB_BRANCH}
+          search-paths: '{application}/prd'
+encrypt:
+  key: ${CONFIG_SERVER_ENCRYPT_KEY}
+server:
+  port: 8445
+
+logging:
+  level:
+    org:
+      springframework:
+        security: INFO        
+
+        

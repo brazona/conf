@@ -1,0 +1,12 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: config-server
+  namespace: homologation
+data:
+  SPRING_ACTIVE_PROFILE: hmg
+  GITHUB_TOKEN: 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
+  GITHUB_USER: CezarFelipe
+  CONFIG_SERVER_PASS: K49okO2NcS
+  CONFIG_SERVER_ENCRYPT_KEY: 39EC0HEX0H
+  GITHUB_BRANCH: release/1.0.0

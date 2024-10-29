@@ -1,0 +1,45 @@
+apiVersion: v1  
+kind: PersistentVolumeClaim  
+metadata:  
+  name: db-pg-data-pvc  
+  namespace: development  
+  labels:  
+    app: db-pg
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1  
+kind: PersistentVolumeClaim  
+metadata:  
+  name: db-pg-log-pvc  
+  namespace: postgresql  
+  labels:  
+    app: db-pg  
+spec:  
+  storageClassName: longhorn  
+  accessModes:  
+    - ReadWriteOnce  
+  resources:  
+    requests:  
+      storage: 1Gi 
+---
+apiVersion: v1  
+kind: PersistentVolumeClaim  
+metadata:  
+  name: db-pg-backup-pvc  
+  namespace: postgresql  
+  labels:  
+    app: db-pg  
+spec:  
+  storageClassName: longhorn  
+  accessModes:  
+    - ReadWriteOnce  
+  resources:  
+    requests:  
+      storage: 1Gi 
