@@ -1,25 +1,25 @@
 # Configuration Server
 
-Servidores que tem o objetivo que oferecer suporte as aplicações, desde monitoramento de dados, desempenho de recursos computacionais, até persistência de dados.
+Servidor de Configuração dedicado a armazenar arquivos de configurações das aplicações e de oferecer serviço rest para disponibilizar os dados.
 
 ## Estrutura do projeto
 
 ``` text
 
 ├── .github
-│   └── workflows
-│       └── script
-│           └── manifest.sh
-│       └── postgres.yml
-│       └── grafana.yml
-│       └── deploy.yml
+│    └── workflows
+│      └── script
+│         └── manifest.sh
+│      └── postgres.yml
+│      └── grafana.yml
+│      └── deploy.yml
 ├── app
-│   └── profile
-│   └── service
+│   └── profile
+│   └── service
 ├── docs
-│   └── CONTRIBUTING.md
-│   └── CODE_OF_CONDUCT.md
-│   └── PULL_REQUEST_TEMPLATE.md
+│   └── CONTRIBUTING.md
+│   └── CODE_OF_CONDUCT.md
+│   └── PULL_REQUEST_TEMPLATE.md
 └── README.md
 ```
 
