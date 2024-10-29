@@ -45,7 +45,7 @@ jobs:
       envfile: ${{ steps.envfile_search.outputs.envfile }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: File Env Homologation
       if: contains(needs.identify.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
@@ -78,7 +78,7 @@ jobs:
         file: ${{ steps.file.outputs.file-env }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Definition path file
       run: | 
@@ -121,7 +121,7 @@ jobs:
       configmap: ${{ steps.configmap_search.outputs.configmap }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: File Env Homologation
       if: contains(needs.identify.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
@@ -151,7 +151,7 @@ jobs:
       successful: ${{ steps.status.outputs.status }}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     
     - name: Set Kubernetes Context
       uses: azure/k8s-set-context@v1
