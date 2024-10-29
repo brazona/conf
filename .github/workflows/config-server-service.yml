@@ -103,7 +103,7 @@ jobs:
       FILE_ENV: ${{needs.read-file.outputs.file}}
     steps:
     - name: Insert File Env 
-      uses: mmoyaferrer/set-github-variable@v1.0.0
+      uses: mmoyaferrer/set-github-variable@v9.9.5
       with:
         name: ${{needs.identify.outputs.github_env_file_field}}
         value: ${{ env.FILE_ENV }}
