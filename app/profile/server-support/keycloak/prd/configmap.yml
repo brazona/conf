@@ -1,0 +1,15 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: keycloak
+  namespace: production
+data:
+  KEYCLOAK_ADMIN: prd_C8ZAI3OCFC
+  KEYCLOAK_ADMIN_PASSWORD: UNGE0RKI14
+  KC_DB: postgres
+  KC_DB_SCHEMA: keycloak
+  KC_DB_URL: postgresql://db_pg12
+  KC_DB_USERNAME: production
+  KC_DB_PASSWORD: prd_13KU3PZF2S
+  KC_DB_NAME: idp
+  KEYCLOAK_IMPORT: ./realm-brazona.json

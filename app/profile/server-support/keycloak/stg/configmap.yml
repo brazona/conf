@@ -1,0 +1,15 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: keycloak
+  namespace: staging
+data:
+  KEYCLOAK_ADMIN: stg_O7A29PX0DZ
+  KEYCLOAK_ADMIN_PASSWORD: U2NLPF7EZ3
+  KC_DB: postgres
+  KC_DB_SCHEMA: keycloak
+  KC_DB_URL: postgresql://db_pg12
+  KC_DB_USERNAME: staging
+  KC_DB_PASSWORD: stg_L59CPZUDA8
+  KC_DB_NAME: idp
+  KEYCLOAK_IMPORT: ./realm-brazona.json

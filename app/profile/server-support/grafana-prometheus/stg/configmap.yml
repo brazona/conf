@@ -1,0 +1,12 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: grafana
+  namespace: staging
+data:
+  SPRING_ACTIVE_PROFILE: stg
+  GITHUB_TOKEN: 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
+  GITHUB_USER: CezarFelipe
+  CONFIG_SERVER_PASS: sdQeKTyUaC
+  CONFIG_SERVER_ENCRYPT_KEY: PUWGB3PE6W63
+  GITHUB_BRANCH: main
