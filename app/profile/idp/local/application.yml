@@ -3,16 +3,10 @@ server:
   servlet:
     context-path: /api
 spring:
-  docker:
-    compose:
-      enabled: false
-      lifecycle-management: START_ONLY
-      # projects\idp\app\api\src\main\resources
-      # file: ./api/src/main/resources/docker-compose.yml
   jpa:
     properties:
       hibernate:
-        default_schema: api
+        default_schema: idp
         jdbc:
           lob:
             non_contextual_creation: 'true'
@@ -21,20 +15,11 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: validate
-    jakarta:
-      persistence:
-        schema-generation:
-          database:
-            action: none
-          scripts:
-            action: none
-            create-source: metadata
-            create-target: ./api/src/main/resources/db/script/schema.sql
   datasource:
-    url: jdbc:postgresql://localhost:5434/idp
-    password: 123456
-    username: idp_dev
-    schema: api
+    url: jdbc:postgresql://localhost:5434/bza
+    password: 45EO3PDBS2
+    username: app
+    schema: idp
     driver-class-name: org.postgresql.Driver
     hikari:
       connection-timeout: '20000'
@@ -42,35 +27,15 @@ spring:
       maximum-pool-size: '40'
       auto-commit: 'true'
       minimum-idle: '10'
-  liquibase:
-    url: jdbc:postgresql://localhost:5434/idp
-    password: 123456
-    user: idp_dev
-    default-schema: api
-    enabled: true
-    change-log: classpath:db/changelog-master.yml
-    #    change-log: classpath:db_version/changelog-master.yml
-    parameters:
-      sql_user_name_1: user1
-      sql_user_name_2: user2
-      sql_user_name_3: user3
-      sql_user_name_4: user4
 
 logging:
   level:
-    liquibase: DEBUG
     org:
       hibernate: DEBUG
       springframework:
         security: TRACE
         data: DEBUG
 
-springdoc:
-  swagger-ui:
-    csrf:
-      enabled: true
-  api-docs:
-    path: /api-docs
 
 jwt:
   secret: RXN0aGVyemluaGFBbW9yRGFNaW5oYVZpZGE=
@@ -86,5 +51,4 @@ keycloak:
   grant: password
   client:
     id: idp
-    #secret: TxlXTAfkYYSOMjpzRSoSbZ75V0oplE4f
     secret: DhlCtfWsVdblABfje3scJR5bQEv8O3yi
