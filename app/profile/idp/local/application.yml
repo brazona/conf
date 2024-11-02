@@ -16,7 +16,7 @@ spring:
     hibernate:
       ddl-auto: validate
   datasource:
-    url: jdbc:postgresql://localhost:5434/bza
+    url: jdbc:postgresql://localhost:5454/bza
     password: 45EO3PDBS2
     username: app
     schema: idp
@@ -27,15 +27,6 @@ spring:
       maximum-pool-size: '40'
       auto-commit: 'true'
       minimum-idle: '10'
-
-logging:
-  level:
-    org:
-      hibernate: DEBUG
-      springframework:
-        security: TRACE
-        data: DEBUG
-
 
 jwt:
   secret: RXN0aGVyemluaGFBbW9yRGFNaW5oYVZpZGE=
@@ -52,3 +43,23 @@ keycloak:
   client:
     id: idp
     secret: DhlCtfWsVdblABfje3scJR5bQEv8O3yi
+
+logging:
+  file:
+    name: myapp.log
+    max-size: 10MB
+    max-history: 10
+    pattern:
+      console: '%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n'
+  level:
+    root: WARN
+    org:
+      hibernate: DEBUG
+      springframework:
+        security: TRACE
+        data: DEBUG
+        web: DEBUG
+    br:
+      brazona:
+        idp:
+          api: DEBUG  
