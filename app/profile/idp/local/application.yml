@@ -46,7 +46,7 @@ keycloak:
   grant: password
   client:
     id: idp
-    secret: DhlCtfWsVdblABfje3scJR5bQEv8O3yi
+    secret: BNUGEtF3P62q1FQpyIHMMDCw6mtTedVN
  
 logging:
   path: ./src/main/resources/log
