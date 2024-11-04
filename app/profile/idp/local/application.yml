@@ -3,6 +3,10 @@ server:
   servlet:
     context-path: /api
 spring:
+  profiles:
+    active: local
+  application:
+    name: idp
   jpa:
     properties:
       hibernate:
