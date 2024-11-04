@@ -14,7 +14,7 @@ spring:
           use_jdbc_metadata_defaults: 'false'
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
   datasource:
     url: jdbc:postgresql://localhost:5454/bza
     password: 45EO3PDBS2
