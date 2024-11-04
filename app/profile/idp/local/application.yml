@@ -57,7 +57,7 @@ logging:
     max-history: 10
     pattern:
       console: '%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n'
-      
+
   #level: ERROR, WARN, INFO, DEBUG E TRACE    
   level:
     root: WARN
@@ -70,4 +70,4 @@ logging:
     br:
       brazona:
         idp:
-          api: WARN  
+          api: TRACE  
