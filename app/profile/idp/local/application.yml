@@ -49,10 +49,10 @@ keycloak:
     secret: DhlCtfWsVdblABfje3scJR5bQEv8O3yi
  
 logging:
-  path: ./
+  path: ./src/main/resources/log
   file:
-    path: ./  
-    name: ./myapp.log
+    path: ./src/main/resources/log
+    name: ./src/main/resources/log/idp.log
     max-size: 10MB
     max-history: 10
     pattern:
