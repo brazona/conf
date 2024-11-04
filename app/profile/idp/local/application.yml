@@ -57,15 +57,17 @@ logging:
     max-history: 10
     pattern:
       console: '%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n'
+      
+  #level: ERROR, WARN, INFO, DEBUG E TRACE    
   level:
     root: WARN
     org:
-      hibernate: INFO
+      hibernate: WARN
       springframework:
-        security: DEBUG
-        data: INFO
-        web: INFO
+        security: WARN
+        data: WARN
+        web: WARN
     br:
       brazona:
         idp:
-          api: INFO  
+          api: WARN  
