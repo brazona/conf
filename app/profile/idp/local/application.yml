@@ -47,10 +47,12 @@ keycloak:
   client:
     id: idp
     secret: DhlCtfWsVdblABfje3scJR5bQEv8O3yi
-
+ 
 logging:
+  path: ./
   file:
-    name: myapp.log
+    path: ./  
+    name: ./myapp.log
     max-size: 10MB
     max-history: 10
     pattern:
