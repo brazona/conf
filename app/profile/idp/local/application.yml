@@ -54,11 +54,11 @@ logging:
   level:
     root: WARN
     org:
-      hibernate: DEBUG
+      hibernate: INFO
       springframework:
-        security: TRACE
-        data: DEBUG
-        web: DEBUG
+        security: DEBUG
+        data: INFO
+        web: INFO
     br:
       brazona:
         idp:
