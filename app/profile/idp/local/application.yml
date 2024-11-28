@@ -21,8 +21,8 @@ spring:
       ddl-auto: none
   datasource:
     url: jdbc:postgresql://localhost:5454/bza
-    password: 45EO3PDBS2
-    username: app
+    password: Z4HKTFW5WY
+    username: idp
     schema: idp
     driver-class-name: org.postgresql.Driver
     hikari:
