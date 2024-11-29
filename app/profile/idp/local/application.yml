@@ -71,3 +71,11 @@ logging:
       brazona:
         idp:
           api: TRACE  
+
+---
+idp:
+  security:
+    basic:
+      username: LOCAL**O60ZS6G6
+      password: PfQuy2Ml
+      
