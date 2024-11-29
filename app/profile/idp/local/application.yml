@@ -76,4 +76,16 @@ idp:
     basic:
       username: LOCAL**O60ZS6G6
       password: PfQuy2Ml
+
+mail:
+  smtp:
+    host: smtp.gmail.com
+    port: 587
+    auth: 'true'
+    from: '"cezarfelipe2008@gmail.com"'
+    starttls:
+       enable: true
+    credential:
+      username: cezarfelipe2008@gmail.com"
+      password: CC@Gmail@120288
       
