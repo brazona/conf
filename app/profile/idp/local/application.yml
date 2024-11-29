@@ -71,8 +71,6 @@ logging:
       brazona:
         idp:
           api: TRACE  
-
----
 idp:
   security:
     basic:
