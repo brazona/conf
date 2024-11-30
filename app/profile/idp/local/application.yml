@@ -85,6 +85,10 @@ mail:
     from: cezarfelipe2008@gmail.com
     ssl:
       trust: smtp.gmail.com
+      host: smtp.gmail.com
+      factory_port: 465
+      port: 465
+      class: javax.net.ssl.SSLSocketFactory
     starttls:
        enable: true
        required: true
