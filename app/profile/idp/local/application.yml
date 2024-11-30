@@ -82,10 +82,14 @@ mail:
     host: smtp.gmail.com
     port: 587
     auth: 'true'
-    from: '"cezarfelipe2008@gmail.com"'
+    from: cezarfelipe2008@gmail.com
+    ssl:
+      trust: smtp.gmail.com
     starttls:
        enable: true
+       required: true
     credential:
       username: cezarfelipe2008@gmail.com"
-      password: CC@Gmail@120288
+      password: fnnx ubyy curd zrti
+
       
