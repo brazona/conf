@@ -81,6 +81,8 @@ mail:
   smtp:
     host: smtp.gmail.com
     from: cezarfelipe2008@gmail.com
+    auth: true
+    port: 465
     credential:
       username: cezarfelipe2008@gmail.com"
       password: imlhlsxvwxgsgusr
