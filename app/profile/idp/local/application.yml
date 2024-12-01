@@ -83,17 +83,9 @@ mail:
     from: cezarfelipe2008@gmail.com
     credential:
       username: cezarfelipe2008@gmail.com"
-      #password: imlh lsxv wxgs gusr
-      #password: fnnx ubyy curd zrti
       password: imlhlsxvwxgsgusr
-    tls:
-      port: 587
-      auth: true
-      starttls: 
-        enable: true
-        required: true
     ssl:
       port: 465
-      class: javax.net.ssl.SSLSocketFactory      
+      class: javax.net.ssl.SSLSocketFactory
 
       
