@@ -84,7 +84,7 @@ mail:
     auth: true
     port: 465
     credential:
-      username: cezarfelipe2008@gmail.com"
+      username: cezarfelipe2008@gmail.com
       password: imlhlsxvwxgsgusr
     ssl:
       port: 465
