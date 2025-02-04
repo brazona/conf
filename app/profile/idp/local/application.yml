@@ -34,7 +34,7 @@ spring:
 
 jwt:
   secret: RXN0aGVyemluaGFBbW9yRGFNaW5oYVZpZGE=
-  expiration_ms: 86000000
+  expiration_ms: 1800000 # 30 minutos
   auth:
     converter:
       resource-id: idp
