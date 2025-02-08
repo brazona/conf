@@ -1,5 +1,5 @@
 FROM openjdk:21
-LABEL maintainer=Brazoona\ Cézar
+LABEL maintainer=Brazona\ Cézar
 VOLUME /tmp
 
 ARG ARG_SPRING_ACTIVE_PROFILE=local

@@ -1,0 +1,93 @@
+server:
+  port: 7783
+  servlet:
+    context-path: /api
+spring:
+  profiles:
+    active: tst
+  application:
+    name: idp
+  jpa:
+    properties:
+      hibernate:
+        default_schema: idp
+        jdbc:
+          lob:
+            non_contextual_creation: 'true'
+        temp:
+          use_jdbc_metadata_defaults: 'false'
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:postgresql://localhost_tst:5433/bza
+    password: develop
+    username: develop
+    schema: idp
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: '20000'
+      idle-timeout: '10000'
+      maximum-pool-size: '40'
+      auto-commit: 'true'
+      minimum-idle: '10'
+
+jwt:
+  secret: RXN0aGVyemluaGFBbW9yRGFNaW5oYVZpZGE=
+  expiration_ms: 1800000 # 30 minutos
+  auth:
+    converter:
+      resource-id: idp
+      principal-attribute: principal_username
+
+keycloak:
+  url: http://localhost:8084/realms/brazona
+  name: idp
+  grant: password
+  client:
+    id: idp
+    secret: BNUGEtF3P62q1FQpyIHMMDCw6mtTedVN
+ 
+logging:
+  path: ./src/main/resources/log
+  file:
+    path: ./src/main/resources/log
+    name: ./src/main/resources/log/idp.log
+    max-size: 10MB
+    max-history: 10
+    pattern:
+      console: '%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n'
+
+  #level: ERROR, WARN, INFO, DEBUG E TRACE    
+  level:
+    root: WARN
+    org:
+      hibernate: WARN
+      springframework:
+        security: WARN
+        data: WARN
+        web: WARN
+    br:
+      brazona:
+        idp:
+          api: TRACE  
+idp:
+  security:
+    basic:
+      username: LOCAL**O60ZS6G6
+      password: PfQuy2Ml
+
+mail:
+  smtp:
+    host: smtp.gmail.com
+    from: cezarfelipe2008@gmail.com
+    auth: true
+    port: 465
+    credential:
+      username: cezarfelipe2008@gmail.com
+      password: imlhlsxvwxgsgusr
+    ssl:
+      port: 465
+      class: javax.net.ssl.SSLSocketFactory
+
+      
