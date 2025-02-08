@@ -39,6 +39,7 @@ logging:
     org:
       springframework:
         security: DEBUG
+
 ---
 name: dsv
 environment: development
