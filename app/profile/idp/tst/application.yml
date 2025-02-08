@@ -20,7 +20,7 @@ spring:
     hibernate:
       ddl-auto: none
   datasource:
-    url: jdbc:postgresql://localhost_tst:5433/bza
+    url: jdbc:postgresql://db-pg12-local:5432/bza
     password: develop
     username: develop
     schema: idp
