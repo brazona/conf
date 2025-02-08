@@ -2,7 +2,8 @@ version: '3.0'
 
 services:
   app:
-    container_name: config_server_local
+    container_name: ${CONTAINER_NAME}
+    hostname: ${CONTAINER_NAME}
     build:
       context: .
     networks:
