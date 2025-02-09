@@ -20,7 +20,8 @@ spring:
     hibernate:
       ddl-auto: none
   datasource:
-    url: jdbc:postgresql://localhost:5454/bza
+    #url: jdbc:postgresql://localhost:5454/bza
+    url: jdbc:postgresql://${DB_SERVER_HOST}/bza
     password: Z4HKTFW5WY
     username: idp
     schema: idp
