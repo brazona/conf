@@ -73,6 +73,8 @@ logging:
         idp:
           api: TRACE  
 idp:
+  cors:
+    origin: ${IDP_CORS_ORIGIN}
   security:
     basic:
       username: LOCAL**O60ZS6G6
