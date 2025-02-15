@@ -7,14 +7,10 @@
 name: Config Server Profile Pipeline
 
 on:
-  push:
-    paths:
-      - 'app/profile/conf/**'
-    branches:
-      - 'main'
   pull_request:
     paths:
-      - 'app/profile/conf/**'
+      - 'app/profile/**'
+      - '.github/workflows/config-server-profile.yml'      
     branches:
       - 'main'
       - 'develop'
@@ -25,22 +21,22 @@ env:
   GITHUB_REPOSITORY: brazona/conf
 jobs:
   #identifica as variaveis 
-  identify:
-    name: Call Identifier
+  info-environment:
+    name: Identifying the Environment
+    permissions: write-all
     uses: ./.github/workflows/identifier.yml
     with:
       github_base_ref: ${{github.base_ref}}
       github_event_name: ${{github.event_name }}
       github_ref_name: ${{github.ref_name}}
-  
-  # Localiza o arquivo .env
+      app_name: conf
   envfile:
     name: Envfile Search
     runs-on: ubuntu-latest
     permissions: write-all
-    needs: [identify]
+    needs: [info-environment]
     env:
-      FILE_PATH: 'app/profile/conf/dsv/.env'
+      FILE_PATH: 'app/profile/config-server-service/dsv/.env'
     outputs:
       envfile: ${{ steps.envfile_search.outputs.envfile }}
     steps:
@@ -48,17 +44,17 @@ jobs:
       uses: actions/checkout@v3
 
     - name: File Env Homologation
-      if: contains(needs.identify.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
+      if: contains(needs.info-environment.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
       run: |
-        echo "FILE_PATH=app/profile/conf/hmg/.env" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/config-server-service/hmg/.env" >> $GITHUB_ENV
     - name: File Env Staging
-      if: contains(needs.identify.outputs.github_env_file_field, 'STAGING_ENV')
+      if: contains(needs.info-environment.outputs.github_env_file_field, 'STAGING_ENV')
       run: |
-        echo "FILE_PATH=app/profile/conf/stg/.env" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/config-server-service/stg/.env" >> $GITHUB_ENV
     - name: File Env Production
-      if: contains(needs.identify.outputs.github_env_file_field, 'PRODUCTION_ENV')
+      if: contains(needs.info-environment.outputs.github_env_file_field, 'PRODUCTION_ENV')
       run: |
-        echo "FILE_PATH=app/profile/conf/prd/.env" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/config-server-service/prd/.env" >> $GITHUB_ENV
     - name: Out Envfile path
       id: envfile_search
       run: echo "envfile=${{ env.FILE_PATH }}" >> $GITHUB_OUTPUT
@@ -68,12 +64,12 @@ jobs:
     name: Read File Env
     runs-on: ubuntu-latest
     permissions: write-all
-    needs: [identify , envfile]
+    needs: [info-environment , envfile]
     env:
       PATH_FILE_ENV: ${{needs.envfile.outputs.envfile}}
       FILE_VALUE: ""
     environment:
-        name: ${{needs.identify.outputs.environment_name}}
+        name: ${{needs.info-environment.outputs.environment_name}}
     outputs:
         file: ${{ steps.file.outputs.file-env }}
     steps:
@@ -96,16 +92,16 @@ jobs:
     name: Deploy File
     runs-on: ubuntu-latest
     permissions: write-all
-    needs: [identify, read-file]
+    needs: [info-environment, read-file]
     environment:
-        name: ${{needs.identify.outputs.environment_name}}
+        name: ${{needs.info-environment.outputs.environment_name}}
     env:
       FILE_ENV: ${{needs.read-file.outputs.file}}
     steps:
     - name: Insert File Env 
       uses: mmoyaferrer/set-github-variable@v1.0.0
       with:
-        name: ${{needs.identify.outputs.github_env_file_field}}
+        name: ${{ env.APP }}${{needs.info-environment.outputs.github_env_file_field}}
         value: ${{ env.FILE_ENV }}
         repository: ${{ env.GITHUB_REPOSITORY }}
         token: ${{ secrets.PIPELINE_TOKEN }}  
@@ -114,9 +110,9 @@ jobs:
     name: Configmap Search
     runs-on: ubuntu-latest
     permissions: write-all
-    needs: [identify]
+    needs: [info-environment]
     env:
-      FILE_PATH: 'app/profile/conf/dsv/configmap.yml'
+      FILE_PATH: 'app/profile/config-server-service/dsv/configmap.yml'
     outputs:
       configmap: ${{ steps.configmap_search.outputs.configmap }}
     steps:
@@ -124,29 +120,31 @@ jobs:
       uses: actions/checkout@v3
 
     - name: File Env Homologation
-      if: contains(needs.identify.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
+      if: contains(needs.info-environment.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
       run: |
-        echo "FILE_PATH=app/profile/conf/hmg/configmap.yml" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/config-server-service/hmg/configmap.yml" >> $GITHUB_ENV
     - name: File Env Staging
-      if: contains(needs.identify.outputs.github_env_file_field, 'STAGING_ENV')
+      if: contains(needs.info-environment.outputs.github_env_file_field, 'STAGING_ENV')
       run: |
-        echo "FILE_PATH=app/profile/conf/stg/configmap.yml" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/config-server-service/stg/configmap.yml" >> $GITHUB_ENV
     - name: File Env Production
-      if: contains(needs.identify.outputs.github_env_file_field, 'PRODUCTION_ENV')
+      if: contains(needs.info-environment.outputs.github_env_file_field, 'PRODUCTION_ENV')
       run: |
-        echo "FILE_PATH=app/profile/conf/prd/configmap.yml" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/config-server-service/prd/configmap.yml" >> $GITHUB_ENV
     - name: Out Configmap path
       id: configmap_search
       run: echo "configmap=${{ env.FILE_PATH }}" >> $GITHUB_OUTPUT
 
+  ### Remover quando tiver ambiente CLoud #######
+      
   # Aplica o deploy no ambiente k8s
   deploy-config:
     name: Deploy Configmap 
     runs-on: ubuntu-latest
     permissions: write-all
-    needs: [identify ,configmap]
+    needs: [info-environment ,configmap]
     environment:
-      name: ${{needs.identify.outputs.environment_name}}
+      name: ${{needs.info-environment.outputs.environment_name}}
     outputs:
       successful: ${{ steps.status.outputs.status }}
     steps:
