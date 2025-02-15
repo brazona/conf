@@ -36,7 +36,7 @@ jobs:
     uses: ./.github/workflows/tag.yml
     with:
       environment_name: ${{needs.info-environment.outputs.environment_name}}
-      path_pom: ./app/pom.xml
+      path_pom: ./app/service/pom.xml
   java:
     name: Maven Build
     needs: [info-environment]
@@ -56,7 +56,7 @@ jobs:
         cache: maven
 
     - name: Build with Maven
-      run: mvn -B package --file app/pom.xml
+      run: mvn -B package --file app/service/pom.xml
   build:
     name: Build and Push Docker image 
     needs: [info-environment, generate-tag, java]
