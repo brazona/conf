@@ -17,7 +17,7 @@ env:
   REGISTRY_DOCKER: ghcr.io
   REPOSITORY_DOCKER: ${{ github.repository }}
   VERSION_TYPE: ''
-  APP: conf
+  APP: service
   
 jobs:
   info-environment:
