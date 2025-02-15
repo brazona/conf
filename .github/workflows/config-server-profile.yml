@@ -31,43 +31,15 @@ jobs:
       github_event_name: ${{github.event_name }}
       github_ref_name: ${{github.ref_name}}
       app_name: conf
-  envfile:
-    name: Envfile Search
-    runs-on: ubuntu-latest
-    permissions: write-all
-    needs: [info-environment]
-    env:
-      FILE_PATH: 'app/profile/config-server-service/dsv/.env'
-    outputs:
-      envfile: ${{ steps.envfile_search.outputs.envfile }}
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    - name: File Env Homologation
-      if: contains(needs.info-environment.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
-      run: |
-        echo "FILE_PATH=app/profile/config-server-service/hmg/.env" >> $GITHUB_ENV
-    - name: File Env Staging
-      if: contains(needs.info-environment.outputs.github_env_file_field, 'STAGING_ENV')
-      run: |
-        echo "FILE_PATH=app/profile/config-server-service/stg/.env" >> $GITHUB_ENV
-    - name: File Env Production
-      if: contains(needs.info-environment.outputs.github_env_file_field, 'PRODUCTION_ENV')
-      run: |
-        echo "FILE_PATH=app/profile/config-server-service/prd/.env" >> $GITHUB_ENV
-    - name: Out Envfile path
-      id: envfile_search
-      run: echo "envfile=${{ env.FILE_PATH }}" >> $GITHUB_OUTPUT
   
   # Realiza leitura do arquivo .env
   read-file:
     name: Read File Env
     runs-on: ubuntu-latest
     permissions: write-all
-    needs: [info-environment , envfile]
+    needs: [info-environment]
     env:
-      PATH_FILE_ENV: ${{needs.envfile.outputs.envfile}}
+      PATH_FILE_ENV: ${{needs.info-environment.outputs.github_env_file_field}}
       FILE_VALUE: ""
     environment:
         name: ${{needs.info-environment.outputs.environment_name}}
