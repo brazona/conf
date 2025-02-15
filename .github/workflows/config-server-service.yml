@@ -96,7 +96,7 @@ jobs:
         env:
           TAG_IMAGE: ${{needs.generate-tag.outputs.tag}}
         with:
-          context: ./app
+          context: ./app/service
           push: true
           tags: ${{ env.REGISTRY_DOCKER }}/${{ github.repository }}/${{ env.APP }}:${{env.TAG_IMAGE}}
   deploy:
@@ -109,7 +109,7 @@ jobs:
     with:
       environment_name: ${{needs.info-environment.outputs.environment_name}}
       name_env: ${{needs.info-environment.outputs.github_env_file_field}}
-      path_app: app
+      path_app: app/service
       docker_image_tag: ${{needs.generate-tag.outputs.tag}}
 
 
