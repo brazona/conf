@@ -5,7 +5,7 @@ metadata:
   namespace: development
 data:
   SPRING_ACTIVE_PROFILE: dsv
-  GITHUB_TOKEN: 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
+  GITHUB_TOKEN: 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
   GITHUB_USER: CezarFelipe
   CONFIG_SERVER_PASS: pjmXiQC1kr
   CONFIG_SERVER_ENCRYPT_KEY: 6BGECCCCX33
