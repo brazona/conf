@@ -80,7 +80,7 @@
         <env name="GITHUB_URL" value="https://github.com/brazona/conf.git" />
       </envs>
       <option name="MAIN_CLASS_NAME" value="br.brazona.config_server.ConfigServerApplication" />
-      <module name="config-server-service" />
+      <module name="conf" />
       <option name="PROGRAM_PARAMETERS" value="SPRING_ACTIVE_PROFILE=local; GITHUB_TOKEN=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; GITHUB_USER=CezarFelipe; CONFIG_SERVER_PASS=oaijfnfnu; CONFIG_SERVER_ENCRYPT_KEY=soadamamauctctc; GITHUB_BRANCH=release/1.0.0; GITHUB_URL=https://github.com/brazona/conf.git" />
       <extension name="coverage">
         <pattern>

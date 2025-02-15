@@ -75,7 +75,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: config-server-service
+  name: conf
   namespace: ${NAMESPACE}
 spec:
   selector:
@@ -103,6 +103,6 @@ spec:
           path: "/"
           backend:
             service:
-              name: config-server-service
+              name: conf
               port:
                 number: 80

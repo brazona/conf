@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.brazona</groupId>
-	<artifactId>config-server-service</artifactId>
+	<artifactId>conf</artifactId>
 	<version>1.0.0</version>
-	<name>config-server-service</name>
+	<name>conf</name>
 	<description>Servidor de configuraçlão das aplicações</description>
 	<url/>
 	<licenses>

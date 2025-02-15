@@ -9,12 +9,12 @@ name: Config Server Service Pipeline
 on:
   push:
     paths:
-      - 'app/profile/config-server-service/**'
+      - 'app/profile/conf/**'
     branches:
       - 'main'
   pull_request:
     paths:
-      - 'app/profile/config-server-service/**'
+      - 'app/profile/conf/**'
     branches:
       - 'main'
       - 'develop'
@@ -22,7 +22,7 @@ on:
       - 'release/**'
   workflow_dispatch:
 env:
-  GITHUB_REPOSITORY: brazona/config-server-service
+  GITHUB_REPOSITORY: brazona/conf
 jobs:
   #identifica as variaveis 
   identify:
@@ -40,7 +40,7 @@ jobs:
     permissions: write-all
     needs: [identify]
     env:
-      FILE_PATH: 'app/profile/config-server-service/dsv/.env'
+      FILE_PATH: 'app/profile/conf/dsv/.env'
     outputs:
       envfile: ${{ steps.envfile_search.outputs.envfile }}
     steps:
@@ -50,15 +50,15 @@ jobs:
     - name: File Env Homologation
       if: contains(needs.identify.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
       run: |
-        echo "FILE_PATH=app/profile/config-server-service/hmg/.env" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/conf/hmg/.env" >> $GITHUB_ENV
     - name: File Env Staging
       if: contains(needs.identify.outputs.github_env_file_field, 'STAGING_ENV')
       run: |
-        echo "FILE_PATH=app/profile/config-server-service/stg/.env" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/conf/stg/.env" >> $GITHUB_ENV
     - name: File Env Production
       if: contains(needs.identify.outputs.github_env_file_field, 'PRODUCTION_ENV')
       run: |
-        echo "FILE_PATH=app/profile/config-server-service/prd/.env" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/conf/prd/.env" >> $GITHUB_ENV
     - name: Out Envfile path
       id: envfile_search
       run: echo "envfile=${{ env.FILE_PATH }}" >> $GITHUB_OUTPUT
@@ -116,7 +116,7 @@ jobs:
     permissions: write-all
     needs: [identify]
     env:
-      FILE_PATH: 'app/profile/config-server-service/dsv/configmap.yml'
+      FILE_PATH: 'app/profile/conf/dsv/configmap.yml'
     outputs:
       configmap: ${{ steps.configmap_search.outputs.configmap }}
     steps:
@@ -126,15 +126,15 @@ jobs:
     - name: File Env Homologation
       if: contains(needs.identify.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
       run: |
-        echo "FILE_PATH=app/profile/config-server-service/hmg/configmap.yml" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/conf/hmg/configmap.yml" >> $GITHUB_ENV
     - name: File Env Staging
       if: contains(needs.identify.outputs.github_env_file_field, 'STAGING_ENV')
       run: |
-        echo "FILE_PATH=app/profile/config-server-service/stg/configmap.yml" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/conf/stg/configmap.yml" >> $GITHUB_ENV
     - name: File Env Production
       if: contains(needs.identify.outputs.github_env_file_field, 'PRODUCTION_ENV')
       run: |
-        echo "FILE_PATH=app/profile/config-server-service/prd/configmap.yml" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/conf/prd/configmap.yml" >> $GITHUB_ENV
     - name: Out Configmap path
       id: configmap_search
       run: echo "configmap=${{ env.FILE_PATH }}" >> $GITHUB_OUTPUT
