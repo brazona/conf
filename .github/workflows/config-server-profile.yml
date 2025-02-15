@@ -156,6 +156,9 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: ${{ secrets.KUBECONFIG }}
+    - name: Readme file ConfigMap
+      run: |
+        cat ${{needs.configmap.outputs.configmap}}   
     - name: Deploy to Cluster
       run: | 
         kubectl apply -f ${{needs.configmap.outputs.configmap}}

@@ -67,3 +67,5 @@ As alterações são aplicadas em determinado ambiente através das **branchs**,
 > *O código fonte neste projeto não possui licença de uso.*
 
 É terminantemente proibido reproduzir, distribuir, alterar, utilizar engenharia reversa ou valer-se de qualquer tentativa de reverter ao seu código-fonte qualquer dos componentes que compõem o SOFTWARE, bem como utilizar subterfúgios para burlar a quantidade de usuários licenciados.
+
+test: run pipeline build conf profile
