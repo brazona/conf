@@ -7,7 +7,7 @@ else
     echo "Parâmentro: DIRETORIO_ENV, é obrigatório";
     echo "Parâmentro: DIR_MANIFEST_IN, é obrigatório";
     echo "Parâmentro: DIR_MANIFEST_OUT, é obrigatório";
-    echo -e "Exemplo:\nbash .github/workflows/scripts/manifest.sh site/env.txt site/deployment.yml site/deployment-temp.yml";
+    echo -e "Exemplo:\nbash .github/workflows/scripts/manifest.sh conf/env.txt conf/deployment.yml conf/deployment-temp.yml";
     exit 1
 fi
 
