@@ -2,9 +2,15 @@ version: '3.0'
 
 services:
   app:
-    container_name: config_server_local
+    container_name: ${CONTAINER_NAME}
+    hostname: ${CONTAINER_NAME}
     build:
       context: .
+    networks:
+      - bza-network
+    restart: always
+    extra_hosts:
+    - "host.docker.internal:host-gateway"  
     environment:
     - SPRING_ACTIVE_PROFILE=${SPRING_ACTIVE_PROFILE}
     - GITHUB_TOKEN=${GITHUB_TOKEN}
@@ -12,5 +18,10 @@ services:
     - CONFIG_SERVER_PASS=${CONFIG_SERVER_PASS}
     - CONFIG_SERVER_ENCRYPT_KEY=${CONFIG_SERVER_ENCRYPT_KEY}
     - GITHUB_BRANCH=${GITHUB_BRANCH}
+    - GITHUB_URL=${GITHUB_URL}
     ports:
       - "8888:8888"
+
+networks:
+  bza-network:
+    external: true
