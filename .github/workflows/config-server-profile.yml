@@ -19,6 +19,7 @@ on:
   workflow_dispatch:
 env:
   GITHUB_REPOSITORY: brazona/conf
+  APP: CONFIG_
 jobs:
   #identifica as variaveis 
   info-environment:
