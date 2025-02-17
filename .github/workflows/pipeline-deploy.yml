@@ -55,7 +55,7 @@ jobs:
       id: values_file_env
       run: echo "values_file_env=${{ env.VALUES }}" >> $GITHUB_OUTPUT
   deploy:
-    name: Deploy K8S
+    name: Publish Manifest K8S
     runs-on: ubuntu-latest
     permissions: write-all
     needs: [envfile]
