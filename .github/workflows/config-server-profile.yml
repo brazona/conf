@@ -33,7 +33,7 @@ jobs:
       github_base_ref: ${{github.base_ref}}
       github_event_name: ${{github.event_name }}
       github_ref_name: ${{github.ref_name}}
-      app_name: 'conf'
+      app_name: 'CONF'
     
   # Localiza o arquivo .env
   envfile:
