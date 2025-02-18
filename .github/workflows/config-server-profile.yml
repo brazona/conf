@@ -93,7 +93,7 @@ jobs:
       run: |
         echo "file-env=${{ env.FILE_VALUE }}" >> $GITHUB_OUTPUT
   
-  # Aplica deploy no ambiente k8s
+  # Aplica deploy no ambiente k8sss
   deploy-env:
     name: Deploy File
     runs-on: ubuntu-latest
