@@ -34,7 +34,7 @@ jobs:
       BRANCH_NAME_REF: ${{inputs.github_base_ref}}
       EVENT_TYPE: ${{inputs.github_event_name}}
       ENV_NAME: ""
-      GITHUB_ENV_FILE_FIELD: ${{inputs.app_name}}_DEVELOPMENT_ENV
+      GITHUB_ENV_FILE_FIELD: DEVELOPMENT_ENV
       APP_NAME: ${{inputs.app_name}}_
     outputs:
       environment_name: ${{ steps.name.outputs.environment_name }}
