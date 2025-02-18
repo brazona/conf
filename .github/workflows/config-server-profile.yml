@@ -110,7 +110,7 @@ jobs:
         name: ${{needs.identify.outputs.github_env_file_field}}
         value: ${{ env.FILE_ENV }}
         repository: ${{ env.GITHUB_REPOSITORY }}
-        token: ${{ secrets.PIPELINE_TOKEN }}  
+        token: ${{ secrets.PIPELINE_DEPLOY_ENV }}  
    # Localiza o arquivo configmap para deploy
   configmap:
     name: Configmap Search
