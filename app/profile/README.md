@@ -2,6 +2,8 @@
 
 Repositório destinado para configurações sensiveis das aplicações que compoem o ecossistema Brazona Tech.
 
+
+
 Qualquer variavel necessária para aplicação ou para o ambiente k8s, estão disponíveis nesse repositório, através do pipeline do github, as informações alteradas nos arquivos são aplicadas nos respectivos ambientes.
 
 ## Estrutura do projeto
@@ -65,3 +67,5 @@ As alterações são aplicadas em determinado ambiente através das **branchs**,
 > *O código fonte neste projeto não possui licença de uso.*
 
 É terminantemente proibido reproduzir, distribuir, alterar, utilizar engenharia reversa ou valer-se de qualquer tentativa de reverter ao seu código-fonte qualquer dos componentes que compõem o SOFTWARE, bem como utilizar subterfúgios para burlar a quantidade de usuários licenciados.
+
+test: run pipeline build conf profile

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bdb7d772-6fa5-4a35-9b76-43769eeb7ca7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/app/profile/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/app/profile/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="release/1.0.0" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;CezarFelipe&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/brazona/conf.git&quot;,
+    &quot;accountId&quot;: &quot;e125a2c5-bc0b-4812-972d-1433170fd0bc&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="customMavenHome" value="D:\systems\brazona\resource\apache-maven-3.9.3" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
+        <option name="useMavenConfig" value="false" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2o9yngBNOUs1RROKJLt4FUDrmtN" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.ConfigServerApplication.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "feature/revisao",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/systems/brazona/workspace/conf",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.38089758",
+    "settings.editor.selected.configurable": "MavenSettings"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="ConfigServerApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+      <envs>
+        <env name="SPRING_ACTIVE_PROFILE" value="local" />
+        <env name="GITHUB_TOKEN" value="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" />
+        <env name="GITHUB_USER" value="CezarFelipe" />
+        <env name="CONFIG_SERVER_PASS" value="oaijfnfnu" />
+        <env name="CONFIG_SERVER_ENCRYPT_KEY" value="soadamamauctctc" />
+        <env name="GITHUB_BRANCH" value="release/1.0.0" />
+        <env name="GITHUB_URL" value="https://github.com/brazona/conf.git" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="br.brazona.config_server.ConfigServerApplication" />
+      <module name="conf" />
+      <option name="PROGRAM_PARAMETERS" value="SPRING_ACTIVE_PROFILE=local; GITHUB_TOKEN=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; GITHUB_USER=CezarFelipe; CONFIG_SERVER_PASS=oaijfnfnu; CONFIG_SERVER_ENCRYPT_KEY=soadamamauctctc; GITHUB_BRANCH=release/1.0.0; GITHUB_URL=https://github.com/brazona/conf.git" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.brazona.config_server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bdb7d772-6fa5-4a35-9b76-43769eeb7ca7" name="Changes" comment="" />
+      <created>1730296255091</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1730296255091</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
