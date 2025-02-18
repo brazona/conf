@@ -3,7 +3,7 @@ on:
   pull_request:
     paths:
       - 'app/service/**'
-      - '.github/workflows/config-server-service.yml'      
+      - '.github/workflows/config-server-service.yml'   
     branches:
       - 'main'
       - 'develop'
