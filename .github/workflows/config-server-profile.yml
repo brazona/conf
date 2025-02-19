@@ -103,6 +103,13 @@ jobs:
     env:
       FILE_ENV: ${{needs.read-file.outputs.file}}
     steps:
+    - name: Test Insert File Env 
+      uses: mmoyaferrer/set-github-variable@v1.0.0
+      with:
+        name: 'SAMPLE_VAR'
+        value: 'Hello World'
+        repository: brazona/conf
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
     - name: Insert File Env 
       uses: mmoyaferrer/set-github-variable@v1.0.0
       with:
