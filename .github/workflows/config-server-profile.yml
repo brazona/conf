@@ -115,8 +115,8 @@ jobs:
       with:
         name: ${{needs.identify.outputs.github_env_file_field}}
         value: ${{ env.FILE_ENV }}
-        repository: ${{ env.GITHUB_REPOSITORY }}
-        token: ${{ secrets.PIPELINE_DEPLOY_ENV }}  
+        repository: brazona/conf
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
    # Localiza o arquivo configmap para deploy
   configmap:
     name: Configmap Search
