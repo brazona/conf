@@ -25,7 +25,6 @@ on:
 env:
   GITHUB_REPOSITORY: brazona/conf
 jobs:
-  #identifica as variaveisss
   identify:
     name: Call Identifier
     uses: ./.github/workflows/identifier.yml

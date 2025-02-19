@@ -34,7 +34,7 @@ jobs:
       BRANCH_NAME_REF: ${{inputs.github_base_ref}}
       EVENT_TYPE: ${{inputs.github_event_name}}
       ENV_NAME: ""
-      GITHUB_ENV_FILE_FIELD: DEVELOPMENT_ENV
+      GITHUB_ENV_FILE_FIELD: "DEVELOPMENT_ENV"
       APP_NAME: ${{inputs.app_name}}_
     outputs:
       environment_name: ${{ steps.name.outputs.environment_name }}
@@ -66,4 +66,5 @@ jobs:
         run: echo "environment_name=${{ env.ENV_NAME }}" >> $GITHUB_OUTPUT
       - name: Defined Name File Environment
         id: name_file_env
-        run: echo "name_file_env=${{env.APP_NAME}}${{ env.GITHUB_ENV_FILE_FIELD }}" >> $GITHUB_OUTPUT
+        # run: echo "name_file_env=${{env.APP_NAME}}${{ env.GITHUB_ENV_FILE_FIELD }}" >> $GITHUB_OUTPUT
+        run: echo "name_file_env=${{ env.GITHUB_ENV_FILE_FIELD }}" >> $GITHUB_OUTPUT
