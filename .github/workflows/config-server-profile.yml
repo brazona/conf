@@ -102,21 +102,14 @@ jobs:
     #     name: ${{needs.identify.outputs.environment_name}}
     env:
       FILE_ENV: ${{needs.read-file.outputs.file}}
-    steps:
-    - name: Test Insert File Env 
-      uses: mmoyaferrer/set-github-variable@v1.0.0
-      with:
-        name: 'SAMPLE_VAR'
-        value: 'Hello World'
-        repository: brazona/conf
-        token: ${{ secrets.REPO_ACCESS_TOKEN }}
-    - name: Insert File Env 
+    steps: 
+    - name: Insert File Env
       uses: mmoyaferrer/set-github-variable@v1.0.0
       with:
         name: ${{needs.identify.outputs.github_env_file_field}}
         value: ${{ env.FILE_ENV }}
-        repository: brazona/conf
-        token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        repository: ${{ env.GITHUB_REPOSITORY }}
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}      
    # Localiza o arquivo configmap para deploy
   configmap:
     name: Configmap Search

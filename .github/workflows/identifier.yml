@@ -66,5 +66,5 @@ jobs:
         run: echo "environment_name=${{ env.ENV_NAME }}" >> $GITHUB_OUTPUT
       - name: Defined Name File Environment
         id: name_file_env
-        # run: echo "name_file_env=${{env.APP_NAME}}${{ env.GITHUB_ENV_FILE_FIELD }}" >> $GITHUB_OUTPUT
-        run: echo "name_file_env=${{ env.GITHUB_ENV_FILE_FIELD }}" >> $GITHUB_OUTPUT
+        run: echo "name_file_env=${{env.APP_NAME}}${{ env.GITHUB_ENV_FILE_FIELD }}" >> $GITHUB_OUTPUT
+        # run: echo "name_file_env=${{ env.GITHUB_ENV_FILE_FIELD }}" >> $GITHUB_OUTPUT
