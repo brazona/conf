@@ -98,8 +98,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     needs: [identify, read-file]
-    environment:
-        name: ${{needs.identify.outputs.environment_name}}
+    # environment:
+    #     name: ${{needs.identify.outputs.environment_name}}
     env:
       FILE_ENV: ${{needs.read-file.outputs.file}}
     steps:
