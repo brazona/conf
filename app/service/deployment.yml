@@ -32,7 +32,7 @@ spec:
         image: ${IMAGE}
         imagePullPolicy: Always
         ports:
-        - containerPort: 8445
+        - containerPort: 8888
           protocol: TCP
         env:
           - name: SPRING_ACTIVE_PROFILE
@@ -70,6 +70,12 @@ spec:
               configMapKeyRef:
                 name: config-server           
                 key: GITHUB_BRANCH
+                
+          - name: GITHUB_URL
+            valueFrom:
+              configMapKeyRef:
+                name: config-server           
+                key: GITHUB_URL     
 
 ---
 kind: Service
@@ -84,7 +90,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8445
+      targetPort: 8888
 
 ---
 

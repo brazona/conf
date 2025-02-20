@@ -19,8 +19,6 @@ on:
       - 'hotfix/**'
       - 'release/**'
   workflow_dispatch:
-env:
-  GITHUB_REPOSITORY: brazona/idp
 jobs:
   #identifica as variaveis 
   identify:
