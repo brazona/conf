@@ -1,4 +1,4 @@
-name: Apply Manifest K8S
+name: Pipeline Deploy
 on:
   workflow_call:
     secrets:
@@ -26,6 +26,7 @@ env:
   MANIFEST_OUT: ${{ inputs.path_app }}/deployment-run.yml
   ENV_TXT: ${{ inputs.path_app }}/env.txt
   TEMPLATE_TXT: ${{ inputs.path_app }}/template.txt
+  DOCKER_IMAGE_TAG: ${{ inputs.docker_image_tag }}
 jobs:
   envfile:
     name: Env File
@@ -70,7 +71,7 @@ jobs:
     - name: Preparete Manisfest k8s
       run: |
         echo ${{ needs.envfile.outputs.var_values }} >> "${{env.TEMPLATE_TXT}}" 
-        bash .github/workflows/scripts/manifest.sh ${{env.TEMPLATE_TXT}} ${{env.MANIFEST_IN}} ${{env.MANIFEST_OUT}} ${{inputs.docker_image_tag}}
+        bash .github/workflows/scripts/manifest.sh ${{env.TEMPLATE_TXT}} ${{env.MANIFEST_IN}} ${{env.MANIFEST_OUT}} ${{env.DOCKER_IMAGE_TAG}}
     - name: Set Kubernetes Context
       uses: azure/k8s-set-context@v1
       with:

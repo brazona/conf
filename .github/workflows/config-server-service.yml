@@ -80,7 +80,7 @@ jobs:
           tags: ${{ env.REGISTRY_DOCKER }}/${{ github.repository }}/${{ env.APP }}:${{env.TAG_IMAGE}}
   deploy:
     name: Pipeline Deploy
-    needs: [build]
+    needs: [build, generate-tag, info-environment]
     permissions: write-all
     uses: ./.github/workflows/pipeline-deploy.yml
     secrets:
