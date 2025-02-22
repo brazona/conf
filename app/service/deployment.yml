@@ -28,48 +28,54 @@ spec:
       imagePullSecrets:
         - name: dockerconfigjson-github-com
       containers:
-      - name: config-server
+      - name: config-server-service
         image: ${IMAGE}
         imagePullPolicy: Always
         ports:
-        - containerPort: 8445
+        - containerPort: 8888
           protocol: TCP
         env:
           - name: SPRING_ACTIVE_PROFILE
             valueFrom:
               configMapKeyRef:
-                name: config-server           
+                name: config-server-service           
                 key: SPRING_ACTIVE_PROFILE
           
           - name: GITHUB_TOKEN
             valueFrom:
               configMapKeyRef:
-                name: config-server           
+                name: config-server-service           
                 key: GITHUB_TOKEN  
 
           - name: GITHUB_USER
             valueFrom:
               configMapKeyRef:
-                name: config-server           
+                name: config-server-service           
                 key: GITHUB_USER   
 
           - name: CONFIG_SERVER_PASS
             valueFrom:
               configMapKeyRef:
-                name: config-server           
+                name: config-server-service           
                 key: CONFIG_SERVER_PASS
 
           - name: CONFIG_SERVER_ENCRYPT_KEY
             valueFrom:
               configMapKeyRef:
-                name: config-server           
+                name: config-server-service           
                 key: CONFIG_SERVER_ENCRYPT_KEY
 
           - name: GITHUB_BRANCH
             valueFrom:
               configMapKeyRef:
-                name: config-server           
+                name: config-server-service           
                 key: GITHUB_BRANCH
+
+          - name: GITHUB_URL
+            valueFrom:
+              configMapKeyRef:
+                name: config-server-service           
+                key: GITHUB_URL     
 
 ---
 kind: Service
@@ -83,8 +89,8 @@ spec:
   type: ClusterIP
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8445
+      port: 8888
+      targetPort: 8888
 
 ---
 
@@ -105,4 +111,4 @@ spec:
             service:
               name: config-server-service
               port:
-                number: 80
+                number: 8888

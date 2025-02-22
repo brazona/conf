@@ -13,14 +13,13 @@ on:
   pull_request:
     paths:
       - 'app/profile/core/github/**'
+      - '.github/workflows/github.yml'  
     branches:
       - 'main'
       - 'develop'
       - 'hotfix/**'
       - 'release/**'
   workflow_dispatch:
-env:
-  GITHUB_REPOSITORY: brazona/idp
 jobs:
   #identifica as variaveis 
   identify:
@@ -30,6 +29,7 @@ jobs:
       github_base_ref: ${{github.base_ref}}
       github_event_name: ${{github.event_name }}
       github_ref_name: ${{github.ref_name}}
+      app_name: github
   
   # Localiza o arquivo secret.yaml
   secret:
