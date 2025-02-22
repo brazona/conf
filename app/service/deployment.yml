@@ -89,7 +89,7 @@ spec:
   type: ClusterIP
   ports:
     - protocol: TCP
-      port: 80
+      port: 8888
       targetPort: 8888
 
 ---
@@ -111,4 +111,4 @@ spec:
             service:
               name: config-server-service
               port:
-                number: 80
+                number: 8888
