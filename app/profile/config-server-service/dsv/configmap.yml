@@ -9,5 +9,5 @@ data:
   GITHUB_USER: CezarFelipe
   CONFIG_SERVER_PASS: pjmXiQC1kr
   CONFIG_SERVER_ENCRYPT_KEY: 6BGECCCCX33
-  GITHUB_BRANCH: develop
+  GITHUB_BRANCH: feature/IDP-17/acesso
   GITHUB_URL: 'https://github.com/brazona/conf.git'
