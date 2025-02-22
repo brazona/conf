@@ -67,7 +67,7 @@ spring:
 encrypt:
   key: ${CONFIG_SERVER_ENCRYPT_KEY}
 server:
-  port: 8445
+  port: 8888
 
 logging:
   level:
@@ -103,7 +103,7 @@ spring:
 encrypt:
   key: ${CONFIG_SERVER_ENCRYPT_KEY}
 server:
-  port: 8445
+  port: 8888
 
 logging:
   level:
@@ -140,7 +140,7 @@ spring:
 encrypt:
   key: ${CONFIG_SERVER_ENCRYPT_KEY}
 server:
-  port: 8445
+  port: 8888
 
 logging:
   level:
@@ -176,7 +176,7 @@ spring:
 encrypt:
   key: ${CONFIG_SERVER_ENCRYPT_KEY}
 server:
-  port: 8445
+  port: 8888
 
 logging:
   level:
