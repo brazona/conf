@@ -16,4 +16,4 @@ data:
   APP_API_PORT: 80
   API_PORT_INTERNAL: 7782
   UI_PORT_INTERNAL: 80
-  IDP_CORS_ORIGIN: http://idp-dsv.rancher.brazona.site:80
+  IDP_CORS_ORIGIN: 'http://idp-dsv.rancher.brazona.site:80'
