@@ -9,7 +9,7 @@ data:
   CONFIG_SERVER_USER: DEV_SFBM31  
   CONFIG_SERVER_PASS: pjmXiQC1kr
   DB_SERVER_HOST: config-server-service-dsv.rancher.brazona.site
-  IDP_CORS_ORIGIN: config-server-service-dsv.rancher.brazona.site
-  APP_API_URL: config-server-service-dsv.rancher.brazona.site
-  APP_API_BASIC_USER: config-server-service-dsv.rancher.brazona.site
-  APP_API_BASIC_PASS: config-server-service-dsv.rancher.brazona.site
+  IDP_CORS_ORIGIN: http://localhost,http://127.0.0.1
+  APP_API_URL: idp-api-dsv.rancher.brazona.site
+  APP_API_BASIC_USER: DEVELOPMENT**QPE85HS2
+  APP_API_BASIC_PASS: j//BDFN!6
