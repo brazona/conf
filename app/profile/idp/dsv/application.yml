@@ -20,6 +20,7 @@ spring:
     hibernate:
       ddl-auto: none
   datasource:
+    #url: jdbc:postgresql://localhost:5454/bza
     url: jdbc:postgresql://${DB_SERVER_HOST}/bza
     password: Z4HKTFW5WY
     username: idp
@@ -72,10 +73,12 @@ logging:
         idp:
           api: TRACE  
 idp:
+  cors:
+    origin: ${IDP_CORS_ORIGIN}
   security:
     basic:
-      username: LOCAL**O60ZS6G6
-      password: PfQuy2Ml
+      username: DEVELOPMENT**QPE85HS2
+      password: j//BDFN!6
 
 mail:
   smtp:

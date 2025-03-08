@@ -4,12 +4,19 @@
 ### E arquivo configmap.yml ao ambiente k8s
 ###
 
-name: IDP Pipeline
+name: Profile IDP Pipeline
+
 
 on:
+  push:
+    paths:
+      - 'app/profile/idp/**'
+      - '.github/workflows/idp.yml'
+    branches:
+      - 'main'
   pull_request:
     paths:
-      - 'idp/**'
+      - 'app/profile/idp/**'
       - '.github/workflows/idp.yml'
     branches:
       - 'main'
@@ -20,7 +27,6 @@ on:
 env:
   GITHUB_REPOSITORY: brazona/idp
 jobs:
-  #identifica as variaveis 
   identify:
     name: Call Identifier
     uses: ./.github/workflows/identifier.yml
@@ -28,7 +34,8 @@ jobs:
       github_base_ref: ${{github.base_ref}}
       github_event_name: ${{github.event_name }}
       github_ref_name: ${{github.ref_name}}
-  
+      app_name: 'IDP'
+    
   # Localiza o arquivo .env
   envfile:
     name: Envfile Search
@@ -36,7 +43,7 @@ jobs:
     permissions: write-all
     needs: [identify]
     env:
-      FILE_PATH: 'idp/dsv/.env'
+      FILE_PATH: 'app/profile/idp/dsv/.env'
     outputs:
       envfile: ${{ steps.envfile_search.outputs.envfile }}
     steps:
@@ -46,15 +53,15 @@ jobs:
     - name: File Env Homologation
       if: contains(needs.identify.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
       run: |
-        echo "FILE_PATH=idp/hmg/.env" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/idp/hmg/.env" >> $GITHUB_ENV
     - name: File Env Staging
       if: contains(needs.identify.outputs.github_env_file_field, 'STAGING_ENV')
       run: |
-        echo "FILE_PATH=idp/stg/.env" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/idp/stg/.env" >> $GITHUB_ENV
     - name: File Env Production
       if: contains(needs.identify.outputs.github_env_file_field, 'PRODUCTION_ENV')
       run: |
-        echo "FILE_PATH=idp/prd/.env" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/idp/prd/.env" >> $GITHUB_ENV
     - name: Out Envfile path
       id: envfile_search
       run: echo "envfile=${{ env.FILE_PATH }}" >> $GITHUB_OUTPUT
@@ -87,24 +94,24 @@ jobs:
       run: |
         echo "file-env=${{ env.FILE_VALUE }}" >> $GITHUB_OUTPUT
   
-  # Aplica deploy no ambiente k8s
+  # Aplica deploy no ambiente k8sss
   deploy-env:
     name: Deploy File
     runs-on: ubuntu-latest
     permissions: write-all
     needs: [identify, read-file]
-    environment:
-        name: ${{needs.identify.outputs.environment_name}}
+    # environment:
+    #     name: ${{needs.identify.outputs.environment_name}}
     env:
       FILE_ENV: ${{needs.read-file.outputs.file}}
-    steps:
-    - name: Insert File Env 
+    steps: 
+    - name: Insert File Env
       uses: mmoyaferrer/set-github-variable@v1.0.0
       with:
         name: ${{needs.identify.outputs.github_env_file_field}}
         value: ${{ env.FILE_ENV }}
         repository: ${{ env.GITHUB_REPOSITORY }}
-        token: ${{ secrets.PIPELINE_TOKEN }}  
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}      
    # Localiza o arquivo configmap para deploy
   configmap:
     name: Configmap Search
@@ -112,7 +119,7 @@ jobs:
     permissions: write-all
     needs: [identify]
     env:
-      FILE_PATH: 'idp/dsv/configmap.yml'
+      FILE_PATH: 'app/profile/idp/dsv/configmap.yml'
     outputs:
       configmap: ${{ steps.configmap_search.outputs.configmap }}
     steps:
@@ -122,42 +129,41 @@ jobs:
     - name: File Env Homologation
       if: contains(needs.identify.outputs.github_env_file_field, 'HOMOLOGATION_ENV')
       run: |
-        echo "FILE_PATH=idp/hmg/configmap.yml" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/idp/hmg/configmap.yml" >> $GITHUB_ENV
     - name: File Env Staging
       if: contains(needs.identify.outputs.github_env_file_field, 'STAGING_ENV')
       run: |
-        echo "FILE_PATH=idp/stg/configmap.yml" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/idp/stg/configmap.yml" >> $GITHUB_ENV
     - name: File Env Production
       if: contains(needs.identify.outputs.github_env_file_field, 'PRODUCTION_ENV')
       run: |
-        echo "FILE_PATH=idp/prd/configmap.yml" >> $GITHUB_ENV
+        echo "FILE_PATH=app/profile/idp/prd/configmap.yml" >> $GITHUB_ENV
     - name: Out Configmap path
       id: configmap_search
       run: echo "configmap=${{ env.FILE_PATH }}" >> $GITHUB_OUTPUT
 
-  ### Remover quando tiver ambiente CLoud #######
   # Aplica o deploy no ambiente k8s
-  # deploy-config:
-  #   name: Deploy Configmap 
-  #   runs-on: ubuntu-latest
-  #   permissions: write-all
-  #   needs: [identify ,configmap]
-  #   environment:
-  #     name: ${{needs.identify.outputs.environment_name}}
-  #   outputs:
-  #     successful: ${{ steps.status.outputs.status }}
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v3
+  deploy-config:
+    name: Deploy Configmap 
+    runs-on: ubuntu-latest
+    permissions: write-all
+    needs: [identify ,configmap]
+    environment:
+      name: ${{needs.identify.outputs.environment_name}}
+    outputs:
+      successful: ${{ steps.status.outputs.status }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
     
-  #   - name: Set Kubernetes Context
-  #     uses: azure/k8s-set-context@v1
-  #     with:
-  #       method: kubeconfig
-  #       kubeconfig: ${{ secrets.KUBECONFIG }}
-  #   - name: Deploy to Cluster
-  #     run: | 
-  #       kubectl apply -f ${{needs.configmap.outputs.configmap}}
-  #   - name: Successful
-  #     id: status
-  #     run: echo "status=true" >> $GITHUB_OUTPUT    
+    - name: Set Kubernetes Context
+      uses: azure/k8s-set-context@v1
+      with:
+        method: kubeconfig
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+    - name: Deploy to Cluster
+      run: | 
+        kubectl apply -f ${{needs.configmap.outputs.configmap}}
+    - name: Successful
+      id: status
+      run: echo "status=true" >> $GITHUB_OUTPUT    
