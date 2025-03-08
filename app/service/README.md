@@ -72,7 +72,7 @@ GITHUB_BRANCH=hotfix
 
 ```
 
-### Executar em Ambiente Local com Docker
+### Executar em Ambiente LocalHost com Docker
 
 ---
 
