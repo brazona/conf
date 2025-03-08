@@ -4,12 +4,12 @@ metadata:
   name: idp
   namespace: development
 data:
-  KEYCLOAK_ADMIN: dsv_G6KKDPA2YC
-  KEYCLOAK_ADMIN_PASSWORD: 95DEN4Y9OH
-  KC_DB: postgres
-  KC_DB_SCHEMA: keycloak
-  KC_DB_URL: postgresql://db_pg12
-  KC_DB_USERNAME: development
-  KC_DB_PASSWORD: Y8T41PM4DH
-  KC_DB_NAME: idp
-  KEYCLOAK_IMPORT: ./realm-brazona.json
+  SPRING_ACTIVE_PROFILE: dsv
+  CONFIG_SERVER_HOST: config-server-service-dsv.rancher.brazona.site
+  CONFIG_SERVER_USER: DEV_SFBM31  
+  CONFIG_SERVER_PASS: pjmXiQC1kr
+  DB_SERVER_HOST: config-server-service-dsv.rancher.brazona.site
+  IDP_CORS_ORIGIN: config-server-service-dsv.rancher.brazona.site
+  APP_API_URL: config-server-service-dsv.rancher.brazona.site
+  APP_API_BASIC_USER: config-server-service-dsv.rancher.brazona.site
+  APP_API_BASIC_PASS: config-server-service-dsv.rancher.brazona.site
