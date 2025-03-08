@@ -4,13 +4,19 @@
 ### E arquivo configmap.yml ao ambiente k8s
 ###
 
-name: IDP Pipeline
+name: Profile IDP Pipeline
 
 on:
+  push:
+    paths:
+      - 'app/profile/idp/**'
+      - '.github/workflows/idp.yml'  
+    branches:
+      - 'main'
   pull_request:
     paths:
-      - 'idp/**'
-      - '.github/workflows/idp.yml'
+      - 'app/profile/idp/**'
+      - '.github/workflows/idp.yml'   
     branches:
       - 'main'
       - 'develop'
